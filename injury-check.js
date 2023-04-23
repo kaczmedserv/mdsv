@@ -44,7 +44,11 @@ if (window.location.href == pfl) {
                 DATA_OUT.push(r); 
             }
         }
-        document.getElementById("procids").value = DATA_OUT.join("\n");
+        if (DATA_OUT.length) {
+            document.getElementById("procids").value = DATA_OUT.join("\n");
+        } else {
+            document.getElementById("procids").value = "No injury found."
+        }
     }
 
     printResult();
