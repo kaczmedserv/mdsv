@@ -12,9 +12,10 @@ if (window.location.href == pq1 || window.location.href == pq2) {
         DATA_OUT.push(DATAGRID[index].cells[11].innerText);
     }
 
-    const RESULT = new Object(); 
-    RESULT.Document = DATA_OUT.join("\n");
-    prompt("Invoice numbers from this Print Queue:", RESULT.Document);
+    for (let data_out of DATA_OUT) {
+        document.write(data_out);
+        document.write("<br>");
+    }
 } else {
     alert("This tool works only in \"Print Queue\"!");
 }
