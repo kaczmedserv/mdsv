@@ -102,9 +102,9 @@ if (window.location.href.includes(bs)) {
           table.appendChild(row);
         }
         tableWindow.document.body.appendChild(table);
-      }
+    }
     
-      printResult();
+    printResult();
 } else {
     alert("This tool works only in \"Bulk Services\"!");
 }
