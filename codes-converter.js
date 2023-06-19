@@ -70,9 +70,9 @@ if (window.location.href.includes(bs)) {
             }
             if (CODE[index] == "22-7047") {
                 if (DESCRIPTION[index]?.toUpperCase().includes("CONTRAST")) {
-                    CODE_OUT.push("IL22-62301011");  
+                    CODE_OUT.push("IL22-62311011");  
                 } else {
-                    CODE_OUT.push("IL22-62311011");
+                    CODE_OUT.push("IL22-62301011");
                 }
                 continue CONVERT_NEXT;
             }
