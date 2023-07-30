@@ -40,7 +40,7 @@ if (window.location.href == pfl) {
     }
 
     async function printResult() {
-        document.getElementById("procids").value = "Downloading dates..."; 
+        document.getElementById("procids").value = "Work in progress..."; 
         for (let dataIn of DATA_IN) {
             const r = await getData(dataIn);
             if (r) {
