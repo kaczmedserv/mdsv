@@ -24,13 +24,14 @@ if (window.location.href == pfl) {
                 const parser = new DOMParser();
                 const d = parser.parseFromString(data, "text/html");
                 try {
-                    var MRN = "MRN: " + d.getElementById("field3_1").value;
-                    var DOB = "Patient DoB: " + d.getElementById("field3_2").value;
-                    var VID = "Visit ID: " + d.getElementById("field5_1").value.split("Visit ID: ").pop().split("\n")[0];
-                    var DOP = "Date of Procedure: " + d.getElementById("field1_5").value;
-                    var PRO = "Procedures: " + d.getElementById("field5_1").value.split("Procedures:").pop().replace('\n','');
-                    var MSV = "Medserv: " + d.getElementById("field4_2").value;
-                    return MRN + '\n' + DOB + '\n' + VID + '\n' + DOP + '\n' + PRO + MSV;
+                    var MRN = d.getElementById("field3_1").value;
+                    var DOB = d.getElementById("field3_2").value;
+                    var VID = d.getElementById("field5_1").value.split("Visit ID: ").pop().split("\n")[0];
+                    var DOP = d.getElementById("field1_5").value;
+                    var PRO = d.getElementById("field5_1").value.split("Procedures:").pop().replace('\n','');
+                    var MSV = d.getElementById("field4_2").value;
+                    const RESULT = [MRN, DOB, VID, DOP, PRO, MSV];
+                    return RESULT;
                 } catch (e) {}
             })
             .catch(error => {
@@ -39,18 +40,41 @@ if (window.location.href == pfl) {
     }
 
     async function printResult() {
-        document.getElementById("procids").value = "Generating request..."; 
+        document.getElementById("procids").value = "Generating request...";
+        const DATA_TABLE = [];
         for (let dataIn of DATA_IN) {
             const r = await getData(dataIn);
             if (r) {
-                DATA_OUT.push(r); 
+                const p = "MRN: " + r[0] + '\n' + "Patient DoB: " + r[1] + '\n' + "Visit ID: " + r[2] + '\n' + "Date: " + r[3] + '\n' + "Procedures: " + r[4] + "Medserv: " + r[5];
+                DATA_OUT.push(p);
+                DATA_TABLE.push(r);
             }
         }
+
         if (DATA_OUT.length) {
             document.getElementById("procids").value = DATA_OUT.join("\n\n");
         } else {
             document.getElementById("procids").value = "Error."
         }
+        printTable(DATA_TABLE);
+    }
+
+    function printTable(DATA_TABLE) {
+        const newWindow = window.open('', '_blank', 'width=1500,height=1000');
+        const table = document.createElement('table');
+
+        for (let i = 0; i < DATA_TABLE.length; i++) {
+            const row = document.createElement('tr');
+            for (let j = 0; j < 6; j++) {
+                const cell = document.createElement('td');
+                cell.style.padding = '8px';
+                cell.textContent = DATA_TABLE[i][j];
+                row.appendChild(cell);
+            }
+            table.appendChild(row);
+          }
+
+        newWindow.document.body.appendChild(table);
     }
 
     printResult();
