@@ -66,7 +66,7 @@ if (window.location.href == pfl) {
     }
 
     async function getSide1PDF() {
-        document.getElementById("procids").value = "Downloading Side 1s in progress..."; 
+        let i = 1;
         for (let dataIn of DATA_IN) {
             const r = await getWebId(dataIn);
             if (r) {
@@ -78,6 +78,8 @@ if (window.location.href == pfl) {
                 if (WEB_ID[index]) {
                     await downloadPDF(WEB_ID[index], index);
                 }
+                document.getElementById("procids").value = "Downloading Side 1s in progress... " + i + " of " + DATA_IN.length;
+                i++;
             }  
         } else {
             document.getElementById("procids").value = "Error."

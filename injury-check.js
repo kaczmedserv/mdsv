@@ -37,17 +37,20 @@ if (window.location.href == pfl) {
     }
 
     async function printResult() {
-        document.getElementById("procids").value = "Injury check in progress..."; 
+        let i = 1; 
         for (let dataIn of DATA_IN) {
             const r = await getData(dataIn);
             if (r) {
                 DATA_OUT.push(r); 
             }
+            document.getElementById("procids").value = "Injury check in progress... " + i + " of " + DATA_IN.length;
+            i++;
         }
+        
         if (DATA_OUT.length) {
             document.getElementById("procids").value = DATA_OUT.join("\n");
         } else {
-            document.getElementById("procids").value = "No injury found."
+            document.getElementById("procids").value = "No injury found.";
         }
     }
 

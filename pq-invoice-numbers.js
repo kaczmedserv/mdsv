@@ -12,10 +12,24 @@ if (window.location.href == pq1 || window.location.href == pq2) {
         DATA_OUT.push(DATAGRID[index].cells[11].innerText);
     }
 
-    for (let data_out of DATA_OUT) {
-        document.write(data_out);
-        document.write("<br>");
+    // for (let data_out of DATA_OUT) {
+    //     document.write(data_out);
+    //     document.write("<br>");
+    // }
+
+    const newWindow = window.open('', '_blank', 'width = 200, height = 500');
+    const table = document.createElement('table');
+
+    for (let i = 0; i < DATA_OUT.length; i++) {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.style.padding = '1px';
+        cell.textContent = DATA_OUT[i];
+        row.appendChild(cell);
+        table.appendChild(row);
     }
+
+    newWindow.document.body.appendChild(table);
 } else {
     alert("This tool works only in \"Print Queue\"!");
 }

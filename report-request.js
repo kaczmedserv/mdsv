@@ -40,7 +40,7 @@ if (window.location.href == pfl) {
     }
 
     async function printResult() {
-        document.getElementById("procids").value = "Generating request...";
+        let i = 1;
         const DATA_TABLE = [];
         for (let dataIn of DATA_IN) {
             const r = await getData(dataIn);
@@ -48,6 +48,8 @@ if (window.location.href == pfl) {
                 const p = "MRN: " + r[0] + '\n' + "Patient DoB: " + r[1] + '\n' + "Visit ID: " + r[2] + '\n' + "Date: " + r[3] + '\n' + "Procedures: " + r[4] + "Medserv: " + r[5];
                 DATA_OUT.push(p);
                 DATA_TABLE.push(r);
+                document.getElementById("procids").value = "Generating result... " + i + " of " + DATA_IN.length;
+                i++;
             }
         }
 
@@ -72,7 +74,7 @@ if (window.location.href == pfl) {
                 row.appendChild(cell);
             }
             table.appendChild(row);
-          }
+        }
 
         newWindow.document.body.appendChild(table);
     }

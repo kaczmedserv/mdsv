@@ -40,12 +40,14 @@ if (window.location.href == pfl) {
     }
 
     async function printResult() {
-        document.getElementById("procids").value = "Work in progress..."; 
+        let i = 1;
         for (let dataIn of DATA_IN) {
             const r = await getData(dataIn);
             if (r) {
                 DATA_OUT.push(r); 
             }
+            document.getElementById("procids").value = "Generating results... " + i + " of " + DATA_IN.length;
+            i++
         }
         if (DATA_OUT.length) {
             document.getElementById("procids").value = "Done!";
